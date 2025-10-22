@@ -1,4 +1,4 @@
-﻿#include "widget.h"
+#include "widget.h"
 
 #include <QApplication>
 //#include "QBreakpadHandler.h"
@@ -22,8 +22,10 @@ static bool callback(const wchar_t *dump_path, const wchar_t *id,
 int main(int argc, char *argv[])
 {
     #ifdef Q_OS_WIN
-    // 我测试的时候用的固定的路径，这个目录需要预先创建好，否则会创建dump失败.
-    ExceptionHandler eh(L"D:/ws/BreakpadTest/crashes", NULL, callback, NULL,
+    // 创建crashes目录用于存储dump文件
+    // Create crashes directory for storing dump files
+    // Note: Use relative path "./crashes" or configure via environment variable
+    ExceptionHandler eh(L"./crashes", NULL, callback, NULL,
         ExceptionHandler::HANDLER_ALL);
     #endif
     QApplication a(argc, argv);
